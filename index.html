@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mega Digital | ដំណោះស្រាយអាជីវកម្មឌីជីថលលំដាប់ខ្ពស់</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Kantumruy Pro -->
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #0f172a;
+            --accent: #f59e0b;
+        }
+        body {
+            font-family: 'Kantumruy Pro', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.1), transparent),
+                        radial-gradient(circle at bottom left, rgba(15, 23, 42, 0.05), transparent);
+        }
+        .nav-link-active {
+            color: var(--primary);
+            position: relative;
+        }
+        .nav-link-active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+        }
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+        }
+        /* ចលនាសម្រាប់ផ្នែកនីមួយៗ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* សម្រាប់ប៊ូតុង Telegram ហោះ */
+        .floating-btn {
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+    <!-- Navbar -->
+    <nav id="main-nav" class="fixed w-full z-[100] transition-all duration-300 py-5">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:rotate-12 transition">
+                    <i class="fa-solid fa-rocket text-xl"></i>
+                </div>
+                <span class="text-2xl font-bold tracking-tighter text-slate-900">មេកា.ឌីជីថល</span>
+            </a>
+            
+            <!-- Desktop Links -->
+            <div class="hidden lg:flex items-center gap-10">
+                <a href="#home" class="font-medium hover:text-blue-600 transition">ទំព័រដើម</a>
+                <a href="#services" class="font-medium hover:text-blue-600 transition">សេវាកម្ម</a>
+                <a href="#projects" class="font-medium hover:text-blue-600 transition">ស្នាដៃ</a>
+                <a href="#pricing" class="font-medium hover:text-blue-600 transition">តម្លៃ</a>
+                <a href="#contact" class="bg-blue-600 text-white px-7 py-3 rounded-2xl font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-600/20">ពិភាក្សាគម្រោង</a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button id="mobile-btn" class="lg:hidden text-2xl text-slate-900">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Sidebar Overlay -->
+    <div id="mobile-overlay" class="fixed inset-0 bg-slate-900/60 z-[110] hidden backdrop-blur-sm"></div>
+    <div id="mobile-sidebar" class="fixed top-0 right-0 h-full w-[280px] bg-white z-[120] shadow-2xl transform translate-x-full transition-transform duration-500 p-8 flex flex-col">
+        <button id="mobile-close" class="self-end text-2xl mb-10"><i class="fa-solid fa-xmark"></i></button>
+        <div class="flex flex-col gap-6 text-xl font-bold">
+            <a href="#home" class="mobile-link hover:text-blue-600">ទំព័រដើម</a>
+            <a href="#services" class="mobile-link hover:text-blue-600">សេវាកម្ម</a>
+            <a href="#projects" class="mobile-link hover:text-blue-600">ស្នាដៃ</a>
+            <a href="#pricing" class="mobile-link hover:text-blue-600">តម្លៃ</a>
+            <hr class="border-slate-100">
+            <a href="#contact" class="text-blue-600">ទំនាក់ទំនង</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-gradient min-h-screen flex items-center pt-20 px-6">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+            <div class="space-y-8 reveal">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 rounded-full text-blue-600 text-sm font-bold">
+                    <span class="w-2 h-2 bg-blue-600 rounded-full animate-ping"></span>
+                    ដៃគូឌីជីថលដែលអ្នកអាចទុកចិត្តបាន
+                </div>
+                <h1 class="text-5xl lg:text-7xl font-bold text-slate-900 leading-[1.1]">
+                    ពង្រីកអាជីវកម្ម <br><span class="text-blue-600 italic">ឱ្យលឿនជាងមុន</span> <br>ជាមួយបច្ចេកវិទ្យា
+                </h1>
+                <p class="text-slate-500 text-lg lg:text-xl max-w-xl leading-relaxed">
+                    យើងផ្តល់ជូននូវសេវាកម្មរចនា និងអភិវឌ្ឍន៍បច្ចេកវិទ្យាគ្រប់ជ្រុងជ្រោយ ដើម្បីជួយឱ្យក្រុមហ៊ុនរបស់អ្នកឈានមុខគេក្នុងទីផ្សារ។
+                </p>
+                <div class="flex flex-wrap gap-5">
+                    <a href="#contact" class="px-10 py-5 bg-slate-900 text-white rounded-2xl font-bold text-lg hover:bg-blue-600 transition shadow-2xl flex items-center gap-3 group">
+                        ចាប់ផ្តើមថ្ងៃនេះ <i class="fa-solid fa-arrow-right group-hover:translate-x-2 transition"></i>
+                    </a>
+                    <div class="flex items-center gap-4 px-6 border-l border-slate-200">
+                        <div class="text-2xl font-bold text-slate-900">៥០០+</div>
+                        <div class="text-xs text-slate-400 font-bold uppercase tracking-widest">គម្រោង <br>ទទួលបានជោគជ័យ</div>
+                    </div>
+                </div>
+            </div>
+            <div class="relative reveal delay-200">
+                <div class="absolute -inset-10 bg-blue-400/20 blur-[100px] rounded-full z-0"></div>
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1000" 
+                     alt="[រូបភាពឌីជីថលម៉ាកឃីតធីង]" 
+                     class="relative z-10 rounded-[2.5rem] shadow-2xl border-8 border-white">
+                <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-3xl shadow-xl z-20 flex items-center gap-4 animate-bounce">
+                    <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <div>
+                        <div class="font-bold text-slate-900">លទ្ធផលពិតៗ</div>
+                        <div class="text-xs text-slate-500">ការលក់កើនឡើង ៨០%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20 reveal">
+                <h2 class="text-blue-600 font-bold uppercase tracking-[0.3em] text-sm mb-4">តើយើងធ្វើអ្វីខ្លះ?</h2>
+                <p class="text-3xl lg:text-5xl font-bold text-slate-900">សេវាកម្មដ៏សំបូរបែបសម្រាប់អ្នក</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-10">
+                <!-- Card 1 -->
+                <div class="group p-10 bg-slate-50 rounded-[2rem] hover:bg-blue-600 transition-all duration-500 reveal">
+                    <div class="w-16 h-16 bg-blue-100 group-hover:bg-white/20 rounded-2xl flex items-center justify-center text-blue-600 group-hover:text-white mb-8 transition">
+                        <i class="fa-solid fa-laptop-code text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 group-hover:text-white">Web Solutions</h3>
+                    <p class="text-slate-500 group-hover:text-blue-100 leading-relaxed mb-6">បង្កើតគេហទំព័រលក់ទំនិញ ឬគេហទំព័រក្រុមហ៊ុនដែលមានសុវត្ថិភាពខ្ពស់ និងដើរលឿនបំផុត។</p>
+                    <a href="#" class="text-blue-600 group-hover:text-white font-bold flex items-center gap-2">ស្វែងយល់បន្ថែម <i class="fa-solid fa-chevron-right text-xs"></i></a>
+                </div>
+                <!-- Card 2 -->
+                <div class="group p-10 bg-slate-50 rounded-[2rem] hover:bg-blue-600 transition-all duration-500 reveal delay-100">
+                    <div class="w-16 h-16 bg-blue-100 group-hover:bg-white/20 rounded-2xl flex items-center justify-center text-blue-600 group-hover:text-white mb-8 transition">
+                        <i class="fa-solid fa-fingerprint text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 group-hover:text-white">Branding & Design</h3>
+                    <p class="text-slate-500 group-hover:text-blue-100 leading-relaxed mb-6">រចនា Logo និងអត្តសញ្ញាណម៉ាកយីហោឱ្យមានភាពទាក់ទាញ និងមានលក្ខណៈប្លែកពីគេក្នុងទីផ្សារ។</p>
+                    <a href="#" class="text-blue-600 group-hover:text-white font-bold flex items-center gap-2">ស្វែងយល់បន្ថែម <i class="fa-solid fa-chevron-right text-xs"></i></a>
+                </div>
+                <!-- Card 3 -->
+                <div class="group p-10 bg-slate-50 rounded-[2rem] hover:bg-blue-600 transition-all duration-500 reveal delay-200">
+                    <div class="w-16 h-16 bg-blue-100 group-hover:bg-white/20 rounded-2xl flex items-center justify-center text-blue-600 group-hover:text-white mb-8 transition">
+                        <i class="fa-solid fa-magnifying-glass-chart text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 group-hover:text-white">Marketing Strategy</h3>
+                    <p class="text-slate-500 group-hover:text-blue-100 leading-relaxed mb-6">រៀបចំយុទ្ធសាស្ត្រផ្សព្វផ្សាយលើបណ្តាញសង្គម និង SEO ដើម្បីឱ្យអតិថិជនស្វែងរកអ្នកឃើញមុនគេ។</p>
+                    <a href="#" class="text-blue-600 group-hover:text-white font-bold flex items-center gap-2">ស្វែងយល់បន្ថែម <i class="fa-solid fa-chevron-right text-xs"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-24 px-6 bg-slate-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20 reveal">
+                <h2 class="text-3xl lg:text-5xl font-bold text-slate-900">កញ្ចប់តម្លៃដែលសាកសមបំផុត</h2>
+                <p class="mt-4 text-slate-500">ជ្រើសរើសជម្រើសដែលសាកសមនឹងទំហំអាជីវកម្មរបស់អ្នក</p>
+            </div>
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Startup -->
+                <div class="pricing-card bg-white p-10 rounded-[2.5rem] border border-slate-100 transition-all duration-300 reveal">
+                    <div class="font-bold text-slate-400 uppercase tracking-widest text-xs mb-6">សម្រាប់អាជីវកម្មថ្មី</div>
+                    <div class="text-5xl font-bold text-slate-900 mb-8">$៤៩៩ <span class="text-lg text-slate-400 font-normal">/ម្ដង</span></div>
+                    <ul class="space-y-5 mb-10">
+                        <li class="flex items-center gap-3 text-slate-600"><i class="fa-solid fa-circle-check text-blue-600"></i> ៥ ទំព័រគេហទំព័រ</li>
+                        <li class="flex items-center gap-3 text-slate-600"><i class="fa-solid fa-circle-check text-blue-600"></i> ឥតគិតថ្លៃ Domain ១ឆ្នាំ</li>
+                        <li class="flex items-center gap-3 text-slate-600"><i class="fa-solid fa-circle-check text-blue-600"></i> រចនាសម្រាប់ទូរស័ព្ទ</li>
+                        <li class="flex items-center gap-3 text-slate-400 line-through"><i class="fa-solid fa-circle-xmark"></i> ការគ្រប់គ្រងមាតិកា (CMS)</li>
+                    </ul>
+                    <a href="#contact" class="block text-center py-4 rounded-2xl border-2 border-slate-900 font-bold hover:bg-slate-900 hover:text-white transition">ជ្រើសរើសយកកញ្ចប់នេះ</a>
+                </div>
+                <!-- Growth -->
+                <div class="pricing-card bg-slate-900 p-10 rounded-[2.5rem] relative overflow-hidden text-white transition-all duration-300 scale-105 z-10 shadow-2xl reveal delay-100">
+                    <div class="absolute top-6 right-6 px-3 py-1 bg-blue-600 rounded-full text-[10px] font-bold uppercase">ពេញនិយម</div>
+                    <div class="font-bold text-slate-500 uppercase tracking-widest text-xs mb-6">សម្រាប់ក្រុមហ៊ុនលូតលាស់</div>
+                    <div class="text-5xl font-bold mb-8">$៩៩៩ <span class="text-lg text-slate-500 font-normal">/ម្ដង</span></div>
+                    <ul class="space-y-5 mb-10">
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-blue-400"></i> ទំព័រមិនកំណត់</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-blue-400"></i> ប្រព័ន្ធគ្រប់គ្រង (CMS)</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-blue-400"></i> SEO Optimization</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-blue-400"></i> ជំនួយបច្ចេកទេស ២៤/៧</li>
+                    </ul>
+                    <a href="#contact" class="block text-center py-4 rounded-2xl bg-blue-600 font-bold hover:bg-blue-700 transition shadow-xl shadow-blue-600/30">ចាប់ផ្តើមឥឡូវនេះ</a>
+                </div>
+                <!-- Custom -->
+                <div class="pricing-card bg-white p-10 rounded-[2.5rem] border border-slate-100 transition-all duration-300 reveal delay-200">
+                    <div class="font-bold text-slate-400 uppercase tracking-widest text-xs mb-6">សម្រាប់គម្រោងធំ</div>
+                    <div class="text-3xl font-bold text-slate-900 mb-8">តាមតម្រូវការ</div>
+                    <ul class="space-y-5 mb-10">
+                        <li class="flex items-center gap-3 text-slate-600"><i class="fa-solid fa-circle-check text-blue-600"></i> កម្មវិធីទូរស័ព្ទ (App)</li>
+                        <li class="flex items-center gap-3 text-slate-600"><i class="fa-solid fa-circle-check text-blue-600"></i> ការរចនា UX/UI ផ្ទាល់ខ្លួន</li>
+                        <li class="flex items-center gap-3 text-slate-600"><i class="fa-solid fa-circle-check text-blue-600"></i> ការបញ្ចូល AI និង Automation</li>
+                        <li class="flex items-center gap-3 text-slate-600"><i class="fa-solid fa-circle-check text-blue-600"></i> ការថែទាំពេញមួយជីវិត</li>
+                    </ul>
+                    <a href="#contact" class="block text-center py-4 rounded-2xl border-2 border-slate-900 font-bold hover:bg-slate-900 hover:text-white transition">ពិភាក្សាតម្លៃ</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-24 px-6 bg-white">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-16 reveal">សំណួរដែលសួរញឹកញាប់</h2>
+            <div class="space-y-4">
+                <div class="faq-item border border-slate-100 rounded-3xl p-6 hover:border-blue-600 cursor-pointer transition reveal">
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-lg">តើខ្ញុំត្រូវផ្តល់អ្វីខ្លះដើម្បីចាប់ផ្តើម?</span>
+                        <i class="fa-solid fa-plus text-blue-600 transition-transform"></i>
+                    </div>
+                    <p class="hidden mt-4 text-slate-500 leading-relaxed">អ្នកគ្រាន់តែផ្តល់ព័ត៌មានអំពីអាជីវកម្មរបស់អ្នក រូបភាពខ្លះៗ និងគោលបំណងនៃគម្រោង។ ក្រៅពីនោះ ក្រុមការងារយើងនឹងរៀបចំជូនទាំងអស់។</p>
+                </div>
+                <div class="faq-item border border-slate-100 rounded-3xl p-6 hover:border-blue-600 cursor-pointer transition reveal">
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-lg">តើគម្រោងនីមួយៗប្រើពេលប៉ុន្មាន?</span>
+                        <i class="fa-solid fa-plus text-blue-600 transition-transform"></i>
+                    </div>
+                    <p class="hidden mt-4 text-slate-500 leading-relaxed">ជាមធ្យម សម្រាប់គេហទំព័រក្រុមហ៊ុនគឺប្រើពេលពី ២ ទៅ ៤ សប្តាហ៍។ ចំពោះគម្រោងធំៗអាចនឹងប្រើពេលយូរជាងនេះបន្តិច។</p>
+                </div>
+                <div class="faq-item border border-slate-100 rounded-3xl p-6 hover:border-blue-600 cursor-pointer transition reveal">
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-lg">ចុះបើខ្ញុំចង់កែសម្រួលក្រោយពេលបញ្ចប់?</span>
+                        <i class="fa-solid fa-plus text-blue-600 transition-transform"></i>
+                    </div>
+                    <p class="hidden mt-4 text-slate-500 leading-relaxed">យើងផ្តល់ជូនការថែទាំ និងកែសម្រួលដោយឥតគិតថ្លៃក្នុងរយៈពេល ៣ខែដំបូង បន្ទាប់ពីការប្រគល់គម្រោង។</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-24 px-6 bg-slate-950 text-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="bg-blue-600 rounded-[3.5rem] p-10 lg:p-20 flex flex-col lg:flex-row items-center gap-16 relative overflow-hidden reveal">
+                <div class="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-[100px]"></div>
+                <div class="lg:w-1/2 z-10 space-y-8">
+                    <h2 class="text-4xl lg:text-6xl font-bold leading-tight">ត្រៀមខ្លួន <br>សម្រាប់ភាពជោគជ័យ?</h2>
+                    <p class="text-blue-100 text-lg">ផ្ញើសារមកកាន់យើងឥឡូវនេះ ដើម្បីទទួលបានការពិគ្រោះយោបល់ដោយឥតគិតថ្លៃ ២០នាទី។</p>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center"><i class="fa-solid fa-envelope"></i></div>
+                            <span>hello@megadigital.com</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center"><i class="fa-solid fa-phone"></i></div>
+                            <span>+855 12 345 678</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 w-full z-10">
+                    <form class="bg-white p-10 rounded-[2.5rem] space-y-4 shadow-2xl">
+                        <input type="text" placeholder="ឈ្មោះរបស់អ្នក" class="w-full p-4 bg-slate-100 rounded-2xl text-slate-900 outline-none focus:ring-2 focus:ring-blue-600 transition">
+                        <input type="email" placeholder="អ៊ីមែល" class="w-full p-4 bg-slate-100 rounded-2xl text-slate-900 outline-none focus:ring-2 focus:ring-blue-600 transition">
+                        <textarea placeholder="រៀបរាប់ពីគម្រោងរបស់អ្នក..." rows="4" class="w-full p-4 bg-slate-100 rounded-2xl text-slate-900 outline-none focus:ring-2 focus:ring-blue-600 transition"></textarea>
+                        <button id="form-submit" class="w-full py-4 bg-slate-900 text-white font-bold rounded-2xl hover:bg-blue-600 transition transform active:scale-95 shadow-xl">ផ្ញើសារឥឡូវនេះ</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 bg-slate-950 border-t border-white/5">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white"><i class="fa-solid fa-rocket text-sm"></i></div>
+                <span class="text-xl font-bold text-white tracking-tighter">មេកា.ឌីជីថល</span>
+            </div>
+            <div class="flex gap-8 text-slate-500">
+                <a href="#" class="hover:text-blue-600 transition"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-blue-600 transition"><i class="fa-brands fa-telegram"></i></a>
+                <a href="#" class="hover:text-blue-600 transition"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+            <div class="text-slate-500 text-sm italic">© ២០២៦ មេកា ឌីជីថល។ រក្សាសិទ្ធិគ្រប់យ៉ាង។</div>
+        </div>
+    </footer>
+
+    <!-- Floating Actions -->
+    <div class="fixed bottom-8 right-8 z-[150] flex flex-col gap-4">
+        <a href="https://t.me/yourusername" target="_blank" class="w-14 h-14 bg-blue-500 text-white rounded-full flex items-center justify-center shadow-2xl floating-btn hover:scale-110 transition">
+            <i class="fa-brands fa-telegram text-2xl"></i>
+        </a>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // 1. Navigation Glass Effect on Scroll
+        const nav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('glass-effect', 'py-3', 'shadow-sm');
+                nav.classList.remove('py-5');
+            } else {
+                nav.classList.remove('glass-effect', 'py-3', 'shadow-sm');
+                nav.classList.add('py-5');
+            }
+        });
+
+        // 2. Mobile Menu Logic
+        const mobileBtn = document.getElementById('mobile-btn');
+        const mobileClose = document.getElementById('mobile-close');
+        const mobileSidebar = document.getElementById('mobile-sidebar');
+        const mobileOverlay = document.getElementById('mobile-overlay');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMobileMenu() {
+            mobileSidebar.classList.toggle('translate-x-full');
+            mobileOverlay.classList.toggle('hidden');
+            document.body.classList.toggle('overflow-hidden');
+        }
+
+        mobileBtn.addEventListener('click', toggleMobileMenu);
+        mobileClose.addEventListener('click', toggleMobileMenu);
+        mobileOverlay.addEventListener('click', toggleMobileMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', toggleMobileMenu));
+
+        // 3. FAQ Accordion Logic
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const p = item.querySelector('p');
+                const icon = item.querySelector('i');
+                const isOpen = !p.classList.contains('hidden');
+                
+                // Close all others
+                document.querySelectorAll('.faq-item p').forEach(el => el.classList.add('hidden'));
+                document.querySelectorAll('.faq-item i').forEach(el => {
+                    el.classList.remove('fa-minus', 'rotate-180');
+                    el.classList.add('fa-plus');
+                });
+
+                if (!isOpen) {
+                    p.classList.remove('hidden');
+                    icon.classList.add('fa-minus', 'rotate-180');
+                    icon.classList.remove('fa-plus');
+                }
+            });
+        });
+
+        // 4. Reveal Animations on Scroll
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        window.addEventListener('scroll', reveal);
+        window.onload = reveal;
+
+        // 5. Form Submission Simulation
+        const formBtn = document.getElementById('form-submit');
+        formBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const originalText = formBtn.innerText;
+            formBtn.innerText = 'កំពុងបញ្ជូន...';
+            formBtn.disabled = true;
+
+            setTimeout(() => {
+                formBtn.innerText = 'ផ្ញើបានជោគជ័យ! ✓';
+                formBtn.classList.replace('bg-slate-900', 'bg-green-600');
+                setTimeout(() => {
+                    formBtn.innerText = originalText;
+                    formBtn.classList.replace('bg-green-600', 'bg-slate-900');
+                    formBtn.disabled = false;
+                }, 3000);
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
